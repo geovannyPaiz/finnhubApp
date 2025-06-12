@@ -5,7 +5,6 @@
  * @format
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
 import { StatusBar, StyleSheet, useColorScheme, View, Text } from 'react-native';
 import './global.css'
 
@@ -13,10 +12,9 @@ function App() {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View className='flex flex-col justify-center items-center flex-1'>
+    <View className='flex flex-col justify-center items-center flex-1 bg-custom-background px-4 py-8'>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      {/* <NewAppScreen templateFileName="App.tsx" /> */}
-      <Text className='text-white text-6xl'>hola</Text>
+      <Text className='text-primary text-6xl font-trebuchet'>Finnhub Stock API</Text>
     </View>
   );
 }

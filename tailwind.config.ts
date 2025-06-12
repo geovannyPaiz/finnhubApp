@@ -4,7 +4,17 @@ module.exports = {
     content: ["./App.{js,jsx,ts,tsx}"],
     presets: [require("nativewind/preset")],
     theme: {
-      extend: {},
+      extend: {
+        fontFamily: {
+          trebuchet: ["TrebuchetMS"],
+          "trebuchet-italic": ["Trebuchet-MS-Italic"],
+        },
+        colors: {
+          'custom-background': '#2f2e2e',
+           primary: "#1eba54",
+           secondary: '#979797'
+        },
+      },
     },
     plugins: [],
   }
