@@ -1,6 +1,7 @@
 import auth0 from '../services/auth0';
 import { useDispatch } from 'react-redux';
 import { clearUserProfile, setUserProfile } from '../store/slice/userSlice';
+import { AUTH0_DOMAIN } from '@env';
 
 const useLogin = () => {
   const dispatch = useDispatch();
@@ -9,9 +10,8 @@ const useLogin = () => {
     try {
       const credentials = await auth0.webAuth.authorize({
         scope: 'openid profile email',
-        audience: 'https://dev-k5y61bbt5mkrcof4.us.auth0.com/userinfo',
-        redirectUrl:
-          'com.finnhubapp.auth0://dev-k5y61bbt5mkrcof4.us.auth0.com/android/com.finnhubapp/callback',
+        audience: `https://${AUTH0_DOMAIN}/userinfo`,
+        redirectUrl: `com.finnhubapp.auth0://${AUTH0_DOMAIN}/android/com.finnhubapp/callback`,
       });
       credentials.accessToken;
 

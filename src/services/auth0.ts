@@ -1,8 +1,9 @@
 import Auth0 from 'react-native-auth0';
+import { AUTH0_DOMAIN, AUTH0_CLIENT_ID } from '@env';
 
 const auth0 = new Auth0({
-  domain: 'dev-k5y61bbt5mkrcof4.us.auth0.com',
-  clientId: 'Z0PmgAYjSUWpa2tmjymIKb4hpM7lzWfg',
+  domain: AUTH0_DOMAIN,
+  clientId: AUTH0_CLIENT_ID,
 });
 
 export default auth0;
