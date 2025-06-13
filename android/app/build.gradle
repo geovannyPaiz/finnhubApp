@@ -84,6 +84,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+manifestPlaceholders = [auth0Domain: "dev-k5y61bbt5mkrcof4.us.auth0.com", auth0Scheme: "com.finnhubapp.auth0"]
     }
     signingConfigs {
         debug {

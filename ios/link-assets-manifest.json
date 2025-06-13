@@ -1,0 +1,13 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Trebuchet-MS-Italic.ttf",
+      "sha1": "807e99cb0e684bd28e99a75e45523a24cf493e63"
+    },
+    {
+      "path": "assets/fonts/TrebuchetMS.ttf",
+      "sha1": "07e01f8ff43bd7bb9380d752dc47239de1b5ebd7"
+    }
+  ]
+}
