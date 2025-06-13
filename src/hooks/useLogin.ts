@@ -1,9 +1,9 @@
-import { useState } from 'react';
 import auth0 from '../services/auth0';
+import { useDispatch } from 'react-redux';
+import { clearUserProfile, setUserProfile } from '../store/slice/userSlice';
 
 const useLogin = () => {
-  const [accessToken, setAccessToken] = useState<string | null>(null);
-  const [profile, setProfile] = useState<any>(null);
+  const dispatch = useDispatch();
 
   const login = async () => {
     try {
@@ -13,13 +13,13 @@ const useLogin = () => {
         redirectUrl:
           'com.finnhubapp.auth0://dev-k5y61bbt5mkrcof4.us.auth0.com/android/com.finnhubapp/callback',
       });
-      setAccessToken(credentials.accessToken);
+      credentials.accessToken;
 
       const userInfo = await auth0.auth.userInfo({
         token: credentials.accessToken,
       });
       console.log('userInfo', userInfo);
-      setProfile(userInfo);
+      dispatch(setUserProfile(userInfo));
     } catch (e) {
       console.log('Login error: ', e);
     }
@@ -28,8 +28,7 @@ const useLogin = () => {
   const logout = async () => {
     try {
       await auth0.webAuth.clearSession();
-      setAccessToken(null);
-      setProfile(null);
+      dispatch(clearUserProfile());
     } catch (e) {
       console.log('Logout error: ', e);
     }
@@ -37,7 +36,6 @@ const useLogin = () => {
   return {
     login,
     logout,
-    profile,
   };
 };
 
