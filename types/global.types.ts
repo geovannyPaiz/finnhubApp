@@ -9,5 +9,10 @@ type UserState = {
 
 type AlertItem = {
   symbol: string;
-  alertPrice: number;
+  alertPrice: string | number;
+};
+
+type DropdownItem = {
+  label: string;
+  value: string | number | boolean;
 };
