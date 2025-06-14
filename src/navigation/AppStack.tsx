@@ -1,17 +1,33 @@
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import AlertScreen from '../screens/app/AlertScreen';
-import WatchlistScreen from '../screens/app/WatchlistScreen';
-import GraphScreen from '../screens/app/GraphScreen';
+import TabNavigator from '../components/TabNavigator';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppStack() {
   return (
-    <Stack.Navigator initialRouteName="Alert">
-      <Stack.Screen name="Alert" component={AlertScreen} />
-      <Stack.Screen name="Watchlist" component={WatchlistScreen} />
-      <Stack.Screen name="Graph" component={GraphScreen} />
+    <Stack.Navigator initialRouteName="Finnhub App">
+      <Stack.Screen
+        name="Finnhub App"
+        component={TabNavigator}
+        options={({ route }) => ({
+          headerTitle: route.name,
+          headerShown: true,
+          headerTitleStyle: {
+            color: '#fff',
+            fontWeight: 'bold',
+            textAlign: 'left',
+            top: 0,
+            fontFamily: 'TrebuchetMS',
+          },
+          headerTitleAlign: 'left',
+          headerStyle: {
+            backgroundColor: '#000',
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+        })}
+      />
     </Stack.Navigator>
   );
 }
