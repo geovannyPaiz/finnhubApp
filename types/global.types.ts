@@ -6,3 +6,8 @@ type UserState = {
     [key: string]: any;
   } | null;
 };
+
+type AlertItem = {
+  symbol: string;
+  alertPrice: number;
+};

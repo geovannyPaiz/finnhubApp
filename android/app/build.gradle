@@ -112,6 +112,7 @@ manifestPlaceholders = [auth0Domain: "dev-k5y61bbt5mkrcof4.us.auth0.com", auth0S
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+    implementation project(':react-native-push-notification')
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
