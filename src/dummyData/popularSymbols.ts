@@ -1,4 +1,10 @@
 export const popularSymbols = [
+  { label: 'Bitcoin (BTC)', value: 'BINANCE:BTCUSDT' },
+  { label: 'Ethereum (ETH)', value: 'BINANCE:ETHUSDT' },
+  { label: 'Solana (SOL)', value: 'BINANCE:SOLUSDT' },
+  { label: 'Ripple (XRP)', value: 'BINANCE:XRPUSDT' },
+  { label: 'Cardano (ADA)', value: 'BINANCE:ADAUSDT' },
+  { label: 'Dogecoin (DOGE)', value: 'BINANCE:DOGEUSDT' },
   { label: 'Apple Inc. (AAPL)', value: 'AAPL' },
   { label: 'Amazon.com Inc. (AMZN)', value: 'AMZN' },
   { label: 'Alphabet Inc. (GOOGL)', value: 'GOOGL' },
@@ -18,10 +24,4 @@ export const popularSymbols = [
   { label: 'Bank of America Corp. (BAC)', value: 'BAC' },
   { label: 'Intel Corp. (INTC)', value: 'INTC' },
   { label: 'AMD (Advanced Micro Devices) (AMD)', value: 'AMD' },
-  { label: 'Bitcoin (BTC)', value: 'BINANCE:BTCUSDT' },
-  { label: 'Ethereum (ETH)', value: 'BINANCE:ETHUSDT' },
-  { label: 'Solana (SOL)', value: 'BINANCE:SOLUSDT' },
-  { label: 'Ripple (XRP)', value: 'BINANCE:XRPUSDT' },
-  { label: 'Cardano (ADA)', value: 'BINANCE:ADAUSDT' },
-  { label: 'Dogecoin (DOGE)', value: 'BINANCE:DOGEUSDT' },
 ];

@@ -59,7 +59,7 @@ const TabNavigator = () => {
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name={'Graph'}
         component={GraphScreen}
         options={{
@@ -73,7 +73,7 @@ const TabNavigator = () => {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 };
