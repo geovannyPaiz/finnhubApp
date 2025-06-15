@@ -2,9 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type AlertsState = AlertItem[];
 
-const initialState: AlertsState = [
-  { symbol: 'BINANCE:ETHUSDT', alertPrice: 2500 },
-];
+const initialState: AlertsState = [];
 
 const alertsSlice = createSlice({
   name: 'alerts',

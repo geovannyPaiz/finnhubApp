@@ -12,6 +12,13 @@ type AlertItem = {
   alertPrice: string | number;
 };
 
+type WatchListItem = {
+  symbol: string;
+  alertPrice: string | number;
+  currentPrice: number;
+  percentChange: number;
+};
+
 type DropdownItem = {
   label: string;
   value: string | number | boolean;

@@ -1,15 +1,20 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import PushNotification from 'react-native-push-notification';
 import { FINNHUB_API_KEY } from '@env';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { updateWatchListData } from '../store/slice/watchlistSlice';
 
 export const useFinnhubPriceAlerts = (alerts: AlertItem[]) => {
   const wsRef = useRef<WebSocket | null>(null);
   const triggeredAlertsRef = useRef<Record<string, boolean>>({});
-  const resetAlert = useCallback((symbol: string, price: number) => {
-    const key = `${symbol}-${price}`;
-    delete triggeredAlertsRef.current[key];
-    console.log(`🔄 Alerta reiniciada para ${key}`);
-  }, []);
+  const dispatch = useDispatch();
+  const watlistItemsRef = useRef<WatchListItem[]>([]);
+  const watlistItems = useSelector((state: RootState) => state.watchlist);
+
+  useEffect(() => {
+    watlistItemsRef.current = watlistItems;
+  }, [watlistItems]);
 
   useEffect(() => {
     if (!alerts.length) return;
@@ -33,25 +38,40 @@ export const useFinnhubPriceAlerts = (alerts: AlertItem[]) => {
         if (data.type === 'trade' && data.data) {
           data.data.forEach((trade: any) => {
             const currentSymbol = trade.s;
-            const currentPrice = trade.p;
+            const currentPriceP = trade.p;
 
             const alert = alerts.find(a => a.symbol === currentSymbol);
+
+            const watchlistItem = watlistItemsRef.current.find(
+              a => a.symbol === currentSymbol,
+            );
             if (!alert) return;
 
             const { symbol, alertPrice } = alert;
             const key = `${symbol}-${alertPrice}`;
 
-            if (currentPrice > alertPrice && !triggeredAlertsRef.current[key]) {
-              triggeredAlertsRef.current[key] = true;
+            const percentChange =
+              ((currentPriceP - Number(watchlistItem?.currentPrice)) /
+                Number(watchlistItem?.currentPrice || 1)) *
+              1000;
+            dispatch(
+              updateWatchListData({
+                symbol,
+                currentPrice: currentPriceP,
+                percentChange: parseFloat(percentChange.toFixed(2)),
+              }),
+            );
 
-              console.log(
-                `🚨 ${symbol} superó el precio de alerta: $${alertPrice} → $${currentPrice}`,
-              );
+            if (
+              currentPriceP > alertPrice &&
+              !triggeredAlertsRef.current[key]
+            ) {
+              triggeredAlertsRef.current[key] = true;
 
               PushNotification.localNotification({
                 channelId: 'stock-alerts',
-                title: '📈 Alerta de precio',
-                message: `${symbol} superó $${alertPrice}. Precio actual: $${currentPrice}`,
+                title: '📈 Alert!',
+                message: `${symbol} is over $${alertPrice}. Current Price: $${currentPriceP}`,
                 playSound: true,
                 vibrate: true,
                 soundName: 'default',
@@ -80,7 +100,5 @@ export const useFinnhubPriceAlerts = (alerts: AlertItem[]) => {
       }
       ws.close();
     };
-  }, [JSON.stringify(alerts), resetAlert]);
-
-  return resetAlert;
+  }, [JSON.stringify(alerts)]);
 };

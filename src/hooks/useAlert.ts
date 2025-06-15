@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { alertSchema } from '../utils/validations';
 import { useDispatch } from 'react-redux';
 import { addAlert } from '../store/slice/alertsSlice';
+import { addWatchList } from '../store/slice/watchlistSlice';
 
 export const useAlert = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,9 @@ export const useAlert = () => {
 
   const addNewAlert = (symbol: string, alertPrice: string) => {
     dispatch(addAlert({ symbol, alertPrice }));
+    dispatch(
+      addWatchList({ symbol, alertPrice, currentPrice: 0, percentChange: 0 }),
+    );
     reset({
       symbol: '',
       alertPrice: '',
